@@ -9,13 +9,12 @@ TinyPICO Hardare Pin Assingments
 
     // APA102 Dotstar
     #define DOTSTAR_PWR 13
-	#define DOTSTAR_DATA 2
-	#define DOTSTAR_CLK 12
+    #define DOTSTAR_DATA 2
+    #define DOTSTAR_CLK 12
 
     // Battery
-	#define BAT_CHARGE 34
-	#define BAT_VOLTAGE 35
-    
+    #define BAT_CHARGE 34
+    #define BAT_VOLTAGE 35
 ..
 
 Helper functions
