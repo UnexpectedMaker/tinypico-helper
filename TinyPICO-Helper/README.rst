@@ -3,6 +3,8 @@ TinyPICO Arduino Helper
 
 This library adds some helper functions and useful pin assignments to make coding with TinyPICO & Arduino easier
 
+We will be adding this library to the Arduino IDE library manager once we get closer to shipping the TinyPICOs.
+
 TinyPICO Hardare Pin Assingments
 --------------------------------
 .. code-block:: c++
