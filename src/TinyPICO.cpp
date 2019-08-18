@@ -204,8 +204,8 @@ float TinyPICO::GetBatteryVoltage()
 
 		// grab latest voltage
   		lastMeasuredVoltage = analogRead(BAT_VOLTAGE);
-  		lastMeasuredVoltage /= 3838; // convert to voltage
-  		lastMeasuredVoltage *= 4.2;  // Multiply by 3.7V, our reference voltage
+  		lastMeasuredVoltage /= 1075; // adjust because of 0-1.2V attentuation
+  		lastMeasuredVoltage *= 4.2;  // Multiply by 4.2V, our reference voltage
 	}
 
 	return ( lastMeasuredVoltage );
