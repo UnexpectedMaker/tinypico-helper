@@ -4,7 +4,7 @@
 //
 // See "TinyPICO.h" for purpose, syntax, version history, links, and more.
 //
-// v1.3 - Code cleanup for SWSPI bitbanging and fixed sengle set color not working first time
+// v1.3 - Code cleanup for SWSPI bit-banging and fixed single set color not working the first time
 // v1.2 - Fixed incorrect attenuation calc in the battery voltage method
 // v1.1 - Fixed folder structure to be compliant with the Arduino Library Manager requirements
 // v1.0 - Initial Release
