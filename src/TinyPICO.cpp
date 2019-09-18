@@ -27,7 +27,7 @@
 // Battery divider resistor values
 #define UPPER_DIVIDER 442
 #define LOWER_DIVIDER 160
-#define DEFAULT_VREF  1100  // Default referance voltage in mv
+#define DEFAULT_VREF  1100  // Default reference voltage in mv
 #define BATT_CHANNEL ADC1_CHANNEL_7  // Battery voltage ADC input
 
 TinyPICO::TinyPICO()
@@ -79,25 +79,25 @@ void TinyPICO::DotStar_Show(void)
         swspi_init();
         delay(10);
     }
-    
+
     uint16_t b16 = (uint16_t)brightness; // Type-convert for fixed-point math
 
     // Start-frame marker
-    for( int i=0; i<4; i++) swspi_out(0x00);    
-    
+    for( int i=0; i<4; i++) swspi_out(0x00);
+
     // Pixel start
-    swspi_out(0xFF);     
-    
+    swspi_out(0xFF);
+
     for( int i=0; i<3; i++)
     {
         if( brightness > 0)
             swspi_out((pixel[i] * b16) >> 8); // Scale, write - Scaling pixel brightness on output
         else
-            swspi_out(pixel[i]); // R,G,B @Full brightness (no scaling) 
-    }             
+            swspi_out(pixel[i]); // R,G,B @Full brightness (no scaling)
+    }
 
     // // End frame marker
-    swspi_out(0xFF);  
+    swspi_out(0xFF);
 }
 
 
