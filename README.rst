@@ -35,12 +35,6 @@ Helper functions
     // to eliminate false negatives due to the charge IC not knowing the difference between no battery
     // and a full battery not charging - This is why the charge LED flashes
     bool IsChargingBattery();
-        
-    // Return the internal PICO-D4 temperature in Farenheit
-    uint8_t Get_Internal_Temp_F();
-
-    // Return the internal PICO-D4 temperature in Celcius
-    float Get_Internal_Temp_C();
 
     // Power to the on-oard Dotstar is controlled by a PNP transistor, so low is ON and high is OFF
     // We also need to set the Dotstar clock and data pins to be inputs to prevent power leakage when power is off
@@ -79,8 +73,7 @@ Example Usage
 
     void setup()
     {
-        // Used for debug output only
-        Serial.begin(115200);
+  		// Not used
     }
 
     void loop()
@@ -100,29 +93,5 @@ Example Usage
         // To power down the DotStar for deep sleep you call this
         // tp.DotStar_SetPower( false );
 
-        // Print the internal temperature of the PICO-D4
-        print_temp();
-    }
-
-    void print_temp()
-    {
-        // We only run the contents of this function every *temp_read_interval* step
-        if ( millis() > next_temp_read + temp_read_interval )
-        {
-            next_temp_read = millis();
-
-            // Grab the temperature in Farenheit
-            uint8_t temp_farenheit = tp.Get_Internal_Temp_F();
-
-            // Grab the temperature in Celcius
-            float temp_celsius = tp.Get_Internal_Temp_C();
-
-            // Print the temperatures to the output console
-            Serial.print("Temp In PICO-D4 ");
-            Serial.print(temp_farenheit);
-            Serial.print("°F ");
-            Serial.print(temp_celsius);
-            Serial.println("°C");
-        }
     }
 ..
