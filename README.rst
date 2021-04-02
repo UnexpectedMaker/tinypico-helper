@@ -73,7 +73,7 @@ Example Usage
 
     void setup()
     {
-  		// Not used
+        // Not used
     }
 
     void loop()

@@ -16,13 +16,13 @@
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
 
-	#ifdef __cplusplus
-			extern "C" {
-	#endif
-			uint8_t temprature_sens_read();
-	#ifdef __cplusplus
-			}
-	#endif
+#ifdef __cplusplus
+    extern "C" {
+#endif
+        uint8_t temprature_sens_read();
+#ifdef __cplusplus
+    }
+#endif
 
 // Battery divider resistor values
 #define UPPER_DIVIDER 442
@@ -39,7 +39,7 @@ TinyPICO::TinyPICO()
     DotStar_SetPower( false );
     nextVoltage = millis();
 
-    for (int i = 0; i < 3; i++ )
+    for ( int i = 0; i < 3; i++ )
         pixel[i] = 0;
 
     isInit = false;
@@ -83,14 +83,14 @@ void TinyPICO::DotStar_Show(void)
     uint16_t b16 = (uint16_t)brightness; // Type-convert for fixed-point math
 
     // Start-frame marker
-    for( int i=0; i<4; i++) swspi_out(0x00);
+    for ( int i=0; i<4; i++ ) swspi_out(0x00);
 
     // Pixel start
     swspi_out(0xFF);
 
-    for( int i=0; i<3; i++)
+    for ( int i=0; i<3; i++ )
     {
-        if( brightness > 0)
+        if ( brightness > 0)
             swspi_out((pixel[i] * b16) >> 8); // Scale, write - Scaling pixel brightness on output
         else
             swspi_out(pixel[i]); // R,G,B @Full brightness (no scaling)
@@ -103,9 +103,9 @@ void TinyPICO::DotStar_Show(void)
 
 void TinyPICO::swspi_out(uint8_t n)
 {
-    for(uint8_t i=8; i--; n <<= 1)
+    for ( uint8_t i=8; i--; n <<= 1 )
     {
-        if (n & 0x80)
+        if ( n & 0x80 )
             digitalWrite(DOTSTAR_DATA, HIGH);
         else
             digitalWrite(DOTSTAR_DATA, LOW);
@@ -116,7 +116,7 @@ void TinyPICO::swspi_out(uint8_t n)
 }
 
 void TinyPICO::DotStar_Clear() { // Write 0s (off) to full pixel buffer
-    for (int i = 0; i < 3; i++ )
+    for ( int i = 0; i < 3; i++ )
         pixel[i] = 0;
 
     DotStar_Show();
@@ -145,8 +145,8 @@ void TinyPICO::DotStar_SetPixelColor(uint32_t c)
 void TinyPICO::swspi_init(void)
 {
     DotStar_SetPower( true );
-    digitalWrite(DOTSTAR_DATA , LOW);
-    digitalWrite(DOTSTAR_CLK, LOW);
+    digitalWrite( DOTSTAR_DATA , LOW );
+    digitalWrite( DOTSTAR_CLK, LOW );
 }
 
 void TinyPICO::swspi_end()
@@ -157,9 +157,9 @@ void TinyPICO::swspi_end()
 // Switch the DotStar power
 void TinyPICO::DotStar_SetPower( bool state )
 {
-	digitalWrite( DOTSTAR_PWR, !state );
-	pinMode( DOTSTAR_DATA, state ? OUTPUT : INPUT_PULLDOWN );
-	pinMode( DOTSTAR_CLK, state ? OUTPUT : INPUT_PULLDOWN );
+    digitalWrite( DOTSTAR_PWR, !state );
+    pinMode( DOTSTAR_DATA, state ? OUTPUT : INPUT_PULLDOWN );
+    pinMode( DOTSTAR_CLK, state ? OUTPUT : INPUT_PULLDOWN );
 }
 
 void TinyPICO::DotStar_CycleColor()
@@ -175,11 +175,11 @@ void TinyPICO::DotStar_CycleColor( unsigned long wait = 0 )
 
         colorRotation++;
         byte WheelPos = 255 - colorRotation;
-        if(WheelPos < 85)
+        if ( WheelPos < 85 )
         {
             DotStar_SetPixelColor(255 - WheelPos * 3, 0, WheelPos * 3);
         }
-        else if(WheelPos < 170)
+        else if ( WheelPos < 170 )
         {
             WheelPos -= 85;
             DotStar_SetPixelColor(0, WheelPos * 3, 255 - WheelPos * 3);
@@ -253,7 +253,7 @@ void TinyPICO::Tone( uint8_t pin, uint32_t freq )
     {
         pinMode( pin, OUTPUT);
         ledcSetup(0, freq, 8); // Channel 0, resolution 8
-        ledcAttachPin( pin , 0 );
+        ledcAttachPin( pin, 0 );
         isToneInit = true;
     }
 
